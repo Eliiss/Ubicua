@@ -5,6 +5,7 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import Database.Topics;
 import logic.Log;
+import logic.Logic;
 
 public class MQTTSuscriber implements MqttCallback {
 
@@ -49,11 +50,24 @@ public class MQTTSuscriber implements MqttCallback {
         Log.logmqtt.warn("MQTT Connection lost, cause: {}", cause.getMessage());
     }
 
-    @Override
+@Override
     public void messageArrived(String topic, MqttMessage message) {
-        Log.logmqtt.info("{}: {}", topic, message.toString());
-        Topics newTopic = new Topics();
-        newTopic.setValue(message.toString());
+        String payload = message.toString();
+        Log.logmqtt.info("Mensaje recibido en {}: {}", topic, payload);
+
+        try {
+            // Asumimos que el mensaje es solo el número (ej: "25")
+            int value = Integer.parseInt(payload);
+            
+            // GUARDAMOS EN BASE DE DATOS
+            Log.logmqtt.info("Guardando valor MQTT en BBDD...");
+            Logic.setDataToDB(value); 
+            
+        } catch (NumberFormatException e) {
+            Log.logmqtt.error("El mensaje recibido no es un número válido: " + payload);
+        } catch (Exception e) {
+            Log.logmqtt.error("Error guardando en BBDD desde MQTT: " + e);
+        }
     }
 
     @Override

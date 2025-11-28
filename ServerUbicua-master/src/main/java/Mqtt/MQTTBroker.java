@@ -3,7 +3,7 @@ package mqtt;
 public class MQTTBroker {
 
     private static int qos = 2;
-    private static final String broker = "tcp://mqtt-broker:1883";
+    private static final String broker = "tcp://localhost:1883"; //hay que modificarlo cuando se haga el doocker por mosquitto or sth along the lines 
     private static final String clientId = "WheatherStationUAH";
     private static final String username = "";
     private static final String password = "";
@@ -24,7 +24,7 @@ public class MQTTBroker {
     }
 
     public static String getUsername() {
-        return password;
+        return username;
     }
 
     public static String getPassword() {
