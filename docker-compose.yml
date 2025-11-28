@@ -1,0 +1,12 @@
+services:
+  mqtt-broker:
+    image: eclipse-mosquitto:latest
+    container_name: mqqt-Docker
+    ports:
+      - "1883:1883"
+    restart: unless-stopped
+    volumes:
+      - ./mqtt/config:/mosquitto/config 
+      - ./mqtt/log:/mosquitto/log
+  #database:
+

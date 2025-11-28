@@ -1,0 +1,8 @@
+1764332223: mosquitto version 2.0.22 starting
+1764332223: Config loaded from /mosquitto/config/mosquitto.conf.
+1764332223: Opening ipv4 listen socket on port 1883.
+1764332223: Opening ipv6 listen socket on port 1883.
+1764332223: Opening websockets listen socket on port 9001.
+1764332223: mosquitto version 2.0.22 running
+1764332765: mosquitto version 2.0.22 terminating
+1764332765: Saving in-memory database to /mosquitto/data//mosquitto.db.
