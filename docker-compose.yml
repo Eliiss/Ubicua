@@ -1,12 +1,53 @@
+version: '3.8'
+
 services:
   mqtt-broker:
     image: eclipse-mosquitto:latest
-    container_name: mqqt-Docker
+    container_name: mqtt-ubicua
     ports:
       - "1883:1883"
+      - "9001:9001"
     restart: unless-stopped
     volumes:
-      - ./mqtt/config:/mosquitto/config 
+      - ./mqtt/config:/mosquitto/config
+      - ./mqtt/data:/mosquitto/data
       - ./mqtt/log:/mosquitto/log
-  #database:
+    networks:
+      - red-ubicua
 
+  database:
+    image: mariadb:latest
+    container_name: db-ubicua
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ubicua_db
+      MYSQL_USER: user_ubicua
+      MYSQL_PASSWORD: userpassword
+    restart: unless-stopped
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d
+    networks:
+      - red-ubicua
+
+  tomcat-server:
+    image: tomcat:9.0-jdk11-openjdk
+    container_name: tomcat-ubicua
+    ports:
+      - "8081:8080"
+    restart: unless-stopped
+    environment:
+      DB_URL: jdbc:mysql://database:3306/ubicua_db
+      DB_USER: user_ubicua
+      DB_PASS: userpassword
+    volumes:
+      - ./ServerUbicua-master/target/ServerExampleUbicomp.war:/usr/local/tomcat/webapps/ROOT.war
+    depends_on:
+      - database
+      - mqtt-broker
+    networks:
+      - red-ubicua
+
+networks:
+  red-ubicua:
+    driver: bridge
