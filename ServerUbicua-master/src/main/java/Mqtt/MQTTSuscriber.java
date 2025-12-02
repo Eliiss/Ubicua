@@ -2,10 +2,12 @@ package mqtt;
 
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-
 import Database.Topics;
 import logic.Log;
 import logic.Logic;
+
+import java.sql.Timestamp;
+import com.google.gson.*;
 
 public class MQTTSuscriber implements MqttCallback {
 
@@ -14,6 +16,11 @@ public class MQTTSuscriber implements MqttCallback {
     private String clientId;
     private String username;
     private String password;
+
+    // Si necesitas guardar la última medición de cada tipo
+    private Float temperature = null;
+    private Float humidity = null;
+    private Integer light = null;
 
     public MQTTSuscriber(MQTTBroker broker) {
         this.brokerUrl = broker.getBroker();
@@ -49,28 +56,35 @@ public class MQTTSuscriber implements MqttCallback {
     public void connectionLost(Throwable cause) {
         Log.logmqtt.warn("MQTT Connection lost, cause: {}", cause.getMessage());
     }
-
-@Override
+    @Override
     public void messageArrived(String topic, MqttMessage message) {
         String payload = message.toString();
         Log.logmqtt.info("Mensaje recibido en {}: {}", topic, payload);
-
         try {
-            // Asumimos que el mensaje es solo el número (ej: "25")
-            int value = Integer.parseInt(payload);
-            
-            // GUARDAMOS EN BASE DE DATOS
-            Log.logmqtt.info("Guardando valor MQTT en BBDD...");
-            Logic.setDataToDB(value); 
-            
-        } catch (NumberFormatException e) {
-            Log.logmqtt.error("El mensaje recibido no es un número válido: " + payload);
+            // Parsear el payload JSON
+            JsonObject json = JsonParser.parseString(payload).getAsJsonObject();
+            JsonObject data = json.getAsJsonObject("data");
+            Timestamp ts = Timestamp.valueOf(json.get("timestamp").getAsString().replace("T", " ").replace("Z",""));
+
+            if (topic.equals("ubicomp/temperatura")) {
+                temperature = data.get("temperature_celsius").getAsFloat();
+            } else if (topic.equals("ubicomp/humedad")) {
+                humidity = data.get("humidity_percent").getAsFloat();
+            } else if (topic.equals("ubicomp/luz")) {
+                light = data.get("light_intensity").getAsInt();
+            }
+
+            // Lógica para guardar solo si tienes los tres datos:
+            if (temperature != null && humidity != null && light != null) {
+                Logic.setDataToDB(temperature, humidity, light, ts);
+                // Resetear para el siguiente lote
+                temperature = null; humidity = null; light = null;
+            }
         } catch (Exception e) {
-            Log.logmqtt.error("Error guardando en BBDD desde MQTT: " + e);
+            Log.logmqtt.error("Error procesando mensaje MQTT: " + e);
         }
     }
 
     @Override
-    public void deliveryComplete(IMqttDeliveryToken token) {
-    }
+    public void deliveryComplete(IMqttDeliveryToken token) {}
 }

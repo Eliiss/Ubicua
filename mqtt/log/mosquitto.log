@@ -14,3 +14,135 @@
 1764624199: mosquitto version 2.0.22 running
 1764625999: Saving in-memory database to /mosquitto/data//mosquitto.db.
 1764627802: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1764674416: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1764676216: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1764703767: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1764704728: New connection from 172.18.0.1:46208 on port 1883.
+1764704728: New connection from 172.18.0.1:46210 on port 1883.
+1764704728: New connection from 172.18.0.1:46204 on port 1883.
+1764704728: New connection from 172.18.0.1:46212 on port 1883.
+1764704728: New connection from 172.18.0.1:46214 on port 1883.
+1764704728: New connection from 172.18.0.1:46206 on port 1883.
+1764704728: New client connected from 172.18.0.1:46208 as LAB12JAV-G3 (p2, c1, k15).
+1764704728: Client LAB12JAV-G3 already connected, closing old connection.
+1764704728: New client connected from 172.18.0.1:46210 as LAB12JAV-G3 (p2, c1, k15).
+1764704728: Client LAB12JAV-G3 already connected, closing old connection.
+1764704728: New client connected from 172.18.0.1:46204 as LAB12JAV-G3 (p2, c1, k15).
+1764704728: Client LAB12JAV-G3 already connected, closing old connection.
+1764704728: New client connected from 172.18.0.1:46212 as LAB12JAV-G3 (p2, c1, k15).
+1764704728: Client LAB12JAV-G3 already connected, closing old connection.
+1764704728: New client connected from 172.18.0.1:46214 as LAB12JAV-G3 (p2, c1, k15).
+1764704728: Client LAB12JAV-G3 already connected, closing old connection.
+1764704728: New client connected from 172.18.0.1:46206 as LAB12JAV-G3 (p2, c1, k15).
+1764704729: Client LAB12JAV-G3 closed its connection.
+1764704914: New connection from 172.18.0.1:48038 on port 1883.
+1764704914: New client connected from 172.18.0.1:48038 as LAB12JAV-G3 (p2, c1, k15).
+1764704994: New connection from 172.18.0.1:58648 on port 1883.
+1764704994: New client connected from 172.18.0.1:58648 as mqtt-explorer-71350877 (p2, c1, k60).
+1764705011: New connection from 172.18.0.1:47664 on port 1883.
+1764705011: New client connected from 172.18.0.1:47664 as mqtt-explorer-7df67397 (p2, c1, k60).
+1764705750: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1764705868: Client mqtt-explorer-7df67397 closed its connection.
+1764706182: Client LAB12JAV-G3 closed its connection.
+1764706182: New connection from 172.18.0.1:54154 on port 1883.
+1764706182: New connection from 172.18.0.1:54168 on port 1883.
+1764706182: New connection from 172.18.0.1:54156 on port 1883.
+1764706182: New connection from 172.18.0.1:54188 on port 1883.
+1764706182: New connection from 172.18.0.1:54158 on port 1883.
+1764706182: New connection from 172.18.0.1:54216 on port 1883.
+1764706182: New connection from 172.18.0.1:54218 on port 1883.
+1764706182: New connection from 172.18.0.1:54232 on port 1883.
+1764706182: New connection from 172.18.0.1:54248 on port 1883.
+1764706182: New connection from 172.18.0.1:54262 on port 1883.
+1764706182: New connection from 172.18.0.1:54272 on port 1883.
+1764706182: New connection from 172.18.0.1:54282 on port 1883.
+1764706182: New connection from 172.18.0.1:54286 on port 1883.
+1764706182: New connection from 172.18.0.1:54302 on port 1883.
+1764706182: New connection from 172.18.0.1:54306 on port 1883.
+1764706182: New connection from 172.18.0.1:54320 on port 1883.
+1764706182: New connection from 172.18.0.1:54332 on port 1883.
+1764706182: New connection from 172.18.0.1:54348 on port 1883.
+1764706182: New connection from 172.18.0.1:54350 on port 1883.
+1764706182: New connection from 172.18.0.1:54364 on port 1883.
+1764706182: New connection from 172.18.0.1:54368 on port 1883.
+1764706182: New connection from 172.18.0.1:54378 on port 1883.
+1764706182: New connection from 172.18.0.1:54386 on port 1883.
+1764706182: New connection from 172.18.0.1:54390 on port 1883.
+1764706183: New client connected from 172.18.0.1:54154 as LAB12JAV-G3 (p2, c1, k15).
+1764706183: Client LAB12JAV-G3 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54168 as LAB12JAV-G3 (p2, c1, k15).
+1764706183: New client connected from 172.18.0.1:54156 as mqtt-explorer-7df67397 (p2, c1, k60).
+1764706183: Client mqtt-explorer-7df67397 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54188 as mqtt-explorer-7df67397 (p2, c1, k60).
+1764706183: Client mqtt-explorer-7df67397 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54158 as mqtt-explorer-7df67397 (p2, c1, k60).
+1764706183: Client LAB12JAV-G3 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54216 as LAB12JAV-G3 (p2, c1, k15).
+1764706183: Client mqtt-explorer-7df67397 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54218 as mqtt-explorer-7df67397 (p2, c1, k60).
+1764706183: Client LAB12JAV-G3 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54232 as LAB12JAV-G3 (p2, c1, k15).
+1764706183: Client LAB12JAV-G3 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54248 as LAB12JAV-G3 (p2, c1, k15).
+1764706183: Client LAB12JAV-G3 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54262 as LAB12JAV-G3 (p2, c1, k15).
+1764706183: Client mqtt-explorer-7df67397 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54272 as mqtt-explorer-7df67397 (p2, c1, k60).
+1764706183: Client LAB12JAV-G3 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54282 as LAB12JAV-G3 (p2, c1, k15).
+1764706183: Client mqtt-explorer-7df67397 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54286 as mqtt-explorer-7df67397 (p2, c1, k60).
+1764706183: Client LAB12JAV-G3 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54302 as LAB12JAV-G3 (p2, c1, k15).
+1764706183: Client mqtt-explorer-7df67397 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54306 as mqtt-explorer-7df67397 (p2, c1, k60).
+1764706183: Client LAB12JAV-G3 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54320 as LAB12JAV-G3 (p2, c1, k15).
+1764706183: Client LAB12JAV-G3 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54332 as LAB12JAV-G3 (p2, c1, k15).
+1764706183: Client mqtt-explorer-7df67397 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54348 as mqtt-explorer-7df67397 (p2, c1, k60).
+1764706183: Client mqtt-explorer-7df67397 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54350 as mqtt-explorer-7df67397 (p2, c1, k60).
+1764706183: Client LAB12JAV-G3 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54364 as LAB12JAV-G3 (p2, c1, k15).
+1764706183: Client mqtt-explorer-7df67397 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54368 as mqtt-explorer-7df67397 (p2, c1, k60).
+1764706183: Client LAB12JAV-G3 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54378 as LAB12JAV-G3 (p2, c1, k15).
+1764706183: Client LAB12JAV-G3 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54386 as LAB12JAV-G3 (p2, c1, k15).
+1764706183: Client mqtt-explorer-7df67397 already connected, closing old connection.
+1764706183: New client connected from 172.18.0.1:54390 as mqtt-explorer-7df67397 (p2, c1, k60).
+1764707106: Client mqtt-explorer-7df67397 disconnected.
+1764707127: Client LAB12JAV-G3 has exceeded timeout, disconnecting.
+1764707130: New connection from 172.18.0.1:60568 on port 1883.
+1764707130: New client connected from 172.18.0.1:60568 as LAB12JAV-G3 (p2, c1, k15).
+1764707152: New connection from 172.18.0.1:41830 on port 1883.
+1764707152: New client connected from 172.18.0.1:41830 as mqtt-explorer-7df67397 (p2, c1, k60).
+1764707493: New connection from 172.18.0.1:42962 on port 1883.
+1764707493: Client LAB12JAV-G3 already connected, closing old connection.
+1764707493: New client connected from 172.18.0.1:42962 as LAB12JAV-G3 (p2, c1, k15).
+1764707510: Client mqtt-explorer-7df67397 disconnected.
+1764707512: New connection from 172.18.0.1:52986 on port 1883.
+1764707512: New client connected from 172.18.0.1:52986 as mqtt-explorer-7df67397 (p2, c1, k60).
+1764707537: New connection from 172.18.0.1:35912 on port 1883.
+1764707537: Client LAB12JAV-G3 already connected, closing old connection.
+1764707537: New client connected from 172.18.0.1:35912 as LAB12JAV-G3 (p2, c1, k15).
+1764707607: New connection from 172.18.0.1:41374 on port 1883.
+1764707607: Client LAB12JAV-G3 already connected, closing old connection.
+1764707607: New client connected from 172.18.0.1:41374 as LAB12JAV-G3 (p2, c1, k15).
+1764707770: Client LAB12JAV-G3 has exceeded timeout, disconnecting.
+1764707772: New connection from 172.18.0.1:51096 on port 1883.
+1764707772: New client connected from 172.18.0.1:51096 as LAB12JAV-G3 (p2, c1, k15).
+1764707863: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1764709664: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1764711465: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1764713265: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1764714433: Client mqtt-explorer-7df67397 disconnected.
+1764714818: New connection from 172.18.0.1:50922 on port 1883.
+1764714818: New client connected from 172.18.0.1:50922 as mqtt-explorer-7df67397 (p2, c1, k60).
+1764715005: Client mqtt-explorer-71350877 disconnected.
+1764715008: Client mqtt-explorer-7df67397 disconnected.
+1764715039: Client LAB12JAV-G3 has exceeded timeout, disconnecting.
+1764715066: Saving in-memory database to /mosquitto/data//mosquitto.db.

@@ -26,7 +26,7 @@ public class ConectionDDBB
 	          {
 	            Context ctx = new InitialContext();
 	            // Get the connection factory configured in Tomcat
-	            DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/ubicomp");
+	            DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/ubicua_db");
 	           
 	            // Obtiene una conexion
 	            con = ds.getConnection();
@@ -111,13 +111,13 @@ public class ConectionDDBB
         return ps;
     }    
 
-    public static PreparedStatement GetDataBD(Connection con)
-    {
-    	return getStatement(con,"SELECT * FROM UBICOMP.MEASUREMENT");  	
+// Insertar nueva medición
+    public static PreparedStatement SetDataBD(Connection con) {
+        return getStatement(con, "INSERT INTO SENSOR_DATA (temperature, humidity, light, timestamp) VALUES (?, ?, ?, ?)");
     }
-    
-    public static PreparedStatement SetDataBD(Connection con)
-    {
-    	return getStatement(con,"INSERT INTO UBICOMP.MEASUREMENT (VALUE,DATE) VALUES (?,?)");  	
+
+    // Obtener mediciones
+    public static PreparedStatement GetDataBD(Connection con) {
+        return getStatement(con, "SELECT temperature, humidity, light, timestamp FROM SENSOR_DATA ORDER BY id DESC LIMIT 100");
     }
 }

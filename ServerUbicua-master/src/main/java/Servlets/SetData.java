@@ -15,35 +15,42 @@ import mqtt.MQTTPublisher;
 @WebServlet("/SetData")
 public class SetData extends HttpServlet {
     private static final long serialVersionUID = 1L;
-       
+
     public SetData() { super(); }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Log.log.info("-- Recibido valor desde Web --");
+        Log.log.info("-- Recibido valores desde Web --");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
         try {
-            // 1. Obtenemos el valor
-            String valueStr = request.getParameter("value");
-            // Validamos que sea número para no enviar basura, aunque lo enviamos como String
-            int value = Integer.parseInt(valueStr); 
+            // 1. Obtén los valores de temperatura, humedad, luz del request (por GET o POST)
+            String temperaturaStr = request.getParameter("temperature");
+            String humedadStr = request.getParameter("humidity");
+            String luzStr = request.getParameter("light");
 
-            // 2. PUBLICAMOS EN MQTT (El suscriptor se encargará de guardarlo en la DB)
-            // Usamos un hilo rápido para no hacer esperar al usuario web
+            // Validaciones básicas: revisa que todos estén presentes y sean numéricos
+            if (temperaturaStr == null || humedadStr == null || luzStr == null) {
+                throw new NumberFormatException("Faltan parámetros");
+            }
+            float temperatura = Float.parseFloat(temperaturaStr);
+            float humedad = Float.parseFloat(humedadStr);
+            int luz = Integer.parseInt(luzStr);
+
+            Log.log.info("Valores recibidos - Temp: " + temperatura + " Hum: " + humedad + " Luz: " + luz);
+
+            // 2. PUBLICAR cada valor en su topic MQTT
             new Thread(() -> {
                 MQTTBroker broker = new MQTTBroker();
-                // Publicamos en el MISMO topic que escuchamos en Projectinitializer
-                MQTTPublisher.publish(broker, "ubicomp/temperatura", String.valueOf(value));
+                MQTTPublisher.publish(broker, "ubicomp/temperatura", String.valueOf(temperatura));
+                MQTTPublisher.publish(broker, "ubicomp/humedad", String.valueOf(humedad));
+                MQTTPublisher.publish(broker, "ubicomp/luz", String.valueOf(luz));
             }).start();
-            
-            // 3. Respondemos OK
-            Log.log.info("Valor publicado en MQTT: " + value);
-            out.println("OK"); // Respondemos algo simple para que AJAX sepa que fue bien
 
+            // 3. Respondemos OK
+            out.println("OK");
         } catch (NumberFormatException nfe) {
             out.println("-1");
-            Log.log.error("El valor no es un numero valido: " + nfe);
+            Log.log.error("El valor enviado no es válido: " + nfe);
         } catch (Exception e) {
             out.println("-1");
             Log.log.error("Error publicando: " + e);
@@ -53,6 +60,6 @@ public class SetData extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        doGet(request, response); // soporta tanto GET como POST, igual que antes
     }
 }

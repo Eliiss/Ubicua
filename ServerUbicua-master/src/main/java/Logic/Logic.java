@@ -2,7 +2,6 @@ package logic;
 
 import Database.ConectionDDBB;
 import java.util.ArrayList;
-import java.util.Date;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -11,76 +10,61 @@ import java.sql.ResultSet;
 
 public class Logic 
 {
-	public static ArrayList<Measurement> getDataFromDB()
-	{
-		ArrayList<Measurement> values = new ArrayList<Measurement>();
-		
-		ConectionDDBB conector = new ConectionDDBB();
-		Connection con = null;
-		try
-		{
-			con = conector.obtainConnection(true);
-			Log.log.info("Database Connected");
-			
-			PreparedStatement ps = ConectionDDBB.GetDataBD(con);
-			Log.log.info("Query=>" + ps.toString());
-			ResultSet rs = ps.executeQuery();
-			while (rs.next())
-			{
-				Measurement measure = new Measurement();
-				measure.setValue(rs.getInt("VALUE"));
-				measure.setDate(rs.getTimestamp("DATE"));
-				values.add(measure);
-			}	
-		} catch (SQLException e)
-		{
-			Log.log.error("Error: " + e);
-			values = new ArrayList<Measurement>();
-		} catch (NullPointerException e)
-		{
-			Log.log.error("Error: " + e);
-			values = new ArrayList<Measurement>();
-		} catch (Exception e)
-		{
-			Log.log.error("Error:" + e);
-			values = new ArrayList<Measurement>();
-		}
-		conector.closeConnection(con);
-		return values;
-	}
+    /***
+     * Consulta los últimos 100 registros de SENSOR_DATA y los devuelve como lista.
+     */
+    public static ArrayList<Measurement> getDataFromDB() {
+        ArrayList<Measurement> values = new ArrayList<>();
+        ConectionDDBB conector = new ConectionDDBB();
+        Connection con = null;
 
-	public static ArrayList<Measurement> setDataToDB(int value)
-	{
-		ArrayList<Measurement> values = new ArrayList<Measurement>();
-		
-		ConectionDDBB conector = new ConectionDDBB();
-		Connection con = null;
-		try
-		{
-			con = conector.obtainConnection(true);
-			Log.log.info("Database Connected");
+        try {
+            con = conector.obtainConnection(true);
+            Log.log.info("Database Connected");
 
-			PreparedStatement ps = ConectionDDBB.SetDataBD(con);
-			ps.setInt(1, value);
-			ps.setTimestamp(2, new Timestamp((new Date()).getTime()));
-			Log.log.info("Query=>" + ps.toString());
-			ps.executeUpdate();
-		} catch (SQLException e)
-		{
-			Log.log.error("Error: " + e);
-			values = new ArrayList<Measurement>();
-		} catch (NullPointerException e)
-		{
-			Log.log.error("Error: " + e);
-			values = new ArrayList<Measurement>();
-		} catch (Exception e)
-		{
-			Log.log.error("Error:" + e);
-			values = new ArrayList<Measurement>();
-		}
-		conector.closeConnection(con);
-		return values;
-	}
-	
-	
+            PreparedStatement ps = ConectionDDBB.GetDataBD(con);
+            Log.log.info("Query => " + ps.toString());
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Measurement measure = new Measurement();
+                measure.setTemperature(rs.getFloat("temperature"));
+                measure.setHumidity(rs.getFloat("humidity"));
+                measure.setLight(rs.getInt("light"));
+                measure.setTimestamp(rs.getTimestamp("timestamp"));
+                values.add(measure);
+            }
+        } catch (SQLException | NullPointerException e) {
+            Log.log.error("Error: " + e);
+            values = new ArrayList<>();
+        } finally {
+            conector.closeConnection(con);
+        }
+        return values;
+    }
+
+    /**
+     * Inserta un nuevo registro en la tabla SENSOR_DATA.
+     */
+    public static void setDataToDB(Float temperature, Float humidity, Integer light, Timestamp ts) {
+        ConectionDDBB conector = new ConectionDDBB();
+        Connection con = null;
+        try {
+            con = conector.obtainConnection(true);
+            Log.log.info("Database Connected");
+
+            PreparedStatement ps = ConectionDDBB.SetDataBD(con);
+            ps.setFloat(1, temperature);
+            ps.setFloat(2, humidity);
+            ps.setInt(3, light);
+            ps.setTimestamp(4, ts);
+            Log.log.info("Query => " + ps.toString());
+            ps.executeUpdate();
+
+        } catch (SQLException | NullPointerException e) {
+            Log.log.error("Error: " + e);
+        } finally {
+            conector.closeConnection(con);
+        }
+    }
 }

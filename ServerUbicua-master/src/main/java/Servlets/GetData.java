@@ -15,55 +15,31 @@ import logic.Log;
 import logic.Logic;
 import logic.Measurement;
 
-/**
- * Servlet implementation class GetData
- */
 @WebServlet("/GetData")
 public class GetData extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GetData() {
-        super();
-    }
+    private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
+    public GetData() { super(); }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Log.log.info("--Set new value into the DB--");
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try 
-        {
-            ArrayList<Measurement> values =Logic.getDataFromDB();
+        try {
+            ArrayList<Measurement> values = Logic.getDataFromDB(); // Consulta mediciones (temperatura, humedad, luz, timestamp)
             String jsonMeasurements = new Gson().toJson(values);
-            Log.log.info("Values=>" + jsonMeasurements);
+            Log.log.info("Values => " + jsonMeasurements);
             out.println(jsonMeasurements);
-        } catch (NumberFormatException nfe) 
-        {
-            out.println("-1");
-            Log.log.error("Number Format Exception: " + nfe);
-        } catch (IndexOutOfBoundsException iobe) 
-        {
-            out.println("-1");
-            Log.log.error("Index out of bounds Exception: " + iobe);
-        } catch (Exception e) 
-        {
+        } catch (Exception e) {
             out.println("-1");
             Log.log.error("Exception: " + e);
-        } finally 
-        {
+        } finally {
             out.close();
         }
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        doGet(request, response); // Por convención, GET y POST devuelven lo mismo aquí
     }
 }

@@ -4,30 +4,52 @@ import java.sql.Timestamp;
 
 public class Measurement 
 {
-    private int value;
-    private Timestamp date;
- 
-    // constructors
-    public Measurement() 
-    {
-    	this.value = 0;
-    	this.date = null;
+    private Float temperature;
+    private Float humidity;
+    private Integer light;
+    private Timestamp timestamp;
+
+    // Constructor vacío
+    public Measurement() {}
+
+    // Constructor con todos los campos
+    public Measurement(Float temperature, Float humidity, Integer light, Timestamp timestamp) {
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.light = light;
+        this.timestamp = timestamp;
     }
 
-	public int getValue() {
-		return value;
-	}
+    // Getters y Setters
+    public Float getTemperature() {
+        return temperature;
+    }
 
-	public void setValue(int value) {
-		this.value = value;
-	}
+    public void setTemperature(Float temperature) {
+        this.temperature = temperature;
+    }
 
-	public Timestamp getDate() {
-		return date;
-	}
+    public Float getHumidity() {
+        return humidity;
+    }
 
-	public void setDate(Timestamp date) {
-		this.date = date;
-	}
-    
- }
+    public void setHumidity(Float humidity) {
+        this.humidity = humidity;
+    }
+
+    public Integer getLight() {
+        return light;
+    }
+
+    public void setLight(Integer light) {
+        this.light = light;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+}

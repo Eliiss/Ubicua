@@ -38,6 +38,10 @@ public class Projectinitializer implements ServletContextListener {
                 
                 // CAMBIO: Escuchamos solo nuestro tema específico, no todo (#)
                 suscriber.subscribeTopic("ubicomp/temperatura");
+                suscriber.subscribeTopic("ubicomp/humedad");
+                suscriber.subscribeTopic("ubicomp/luz");
+                suscriber.subscribeTopic("ubicomp/led/set");
+              
                 
                 // Mensaje de prueba
                 MQTTPublisher.publish(broker, "ubicomp/test", "Servidor Tomcat Iniciado y Escuchando");
