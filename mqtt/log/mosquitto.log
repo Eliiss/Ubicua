@@ -534,3 +534,146 @@
 1764962552: New client connected from 172.18.0.4:46562 as WheatherStationUAH-publisher (p2, c1, k60).
 1764962552: Client WheatherStationUAH-publisher disconnected.
 1764962716: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1764962837: New connection from 172.18.0.4:58926 on port 1883.
+1764962837: New client connected from 172.18.0.4:58926 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962837: Client WheatherStationUAH-publisher disconnected.
+1764962837: New connection from 172.18.0.4:58934 on port 1883.
+1764962837: New client connected from 172.18.0.4:58934 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962837: Client WheatherStationUAH-publisher disconnected.
+1764962837: New connection from 172.18.0.4:58942 on port 1883.
+1764962838: New client connected from 172.18.0.4:58942 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962838: Client WheatherStationUAH-publisher disconnected.
+1764962842: New connection from 172.18.0.4:58958 on port 1883.
+1764962842: New client connected from 172.18.0.4:58958 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962842: Client WheatherStationUAH-publisher disconnected.
+1764962842: New connection from 172.18.0.4:58966 on port 1883.
+1764962842: New client connected from 172.18.0.4:58966 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962842: Client WheatherStationUAH-publisher disconnected.
+1764962842: New connection from 172.18.0.4:58974 on port 1883.
+1764962842: New client connected from 172.18.0.4:58974 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962842: Client WheatherStationUAH-publisher disconnected.
+1764962847: New connection from 172.18.0.4:54580 on port 1883.
+1764962847: New client connected from 172.18.0.4:54580 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962847: Client WheatherStationUAH-publisher disconnected.
+1764962847: New connection from 172.18.0.4:54596 on port 1883.
+1764962847: New client connected from 172.18.0.4:54596 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962847: Client WheatherStationUAH-publisher disconnected.
+1764962847: New connection from 172.18.0.4:54612 on port 1883.
+1764962847: New client connected from 172.18.0.4:54612 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962848: Client WheatherStationUAH-publisher disconnected.
+1764962852: New connection from 172.18.0.4:54622 on port 1883.
+1764962852: New client connected from 172.18.0.4:54622 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962852: Client WheatherStationUAH-publisher disconnected.
+1764962852: New connection from 172.18.0.4:54638 on port 1883.
+1764962852: New client connected from 172.18.0.4:54638 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962852: Client WheatherStationUAH-publisher disconnected.
+1764962852: New connection from 172.18.0.4:54648 on port 1883.
+1764962853: New client connected from 172.18.0.4:54648 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962853: Client WheatherStationUAH-publisher disconnected.
+1764962857: New connection from 172.18.0.4:46000 on port 1883.
+1764962857: New client connected from 172.18.0.4:46000 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962857: Client WheatherStationUAH-publisher disconnected.
+1764962857: New connection from 172.18.0.4:46006 on port 1883.
+1764962857: New client connected from 172.18.0.4:46006 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962857: Client WheatherStationUAH-publisher disconnected.
+1764962857: New connection from 172.18.0.4:46008 on port 1883.
+1764962857: New client connected from 172.18.0.4:46008 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962857: Client WheatherStationUAH-publisher disconnected.
+1764962860: New connection from 172.18.0.1:58522 on port 1883.
+1764962860: Client LAB12JAV-G3 already connected, closing old connection.
+1764962860: New client connected from 172.18.0.1:58522 as LAB12JAV-G3 (p2, c1, k15).
+1764962893: New connection from 172.18.0.4:54712 on port 1883.
+1764962894: New client connected from 172.18.0.4:54712 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962894: Client WheatherStationUAH-publisher disconnected.
+1764962894: New connection from 172.18.0.4:54726 on port 1883.
+1764962894: New client connected from 172.18.0.4:54726 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962894: Client WheatherStationUAH-publisher disconnected.
+1764962894: New connection from 172.18.0.4:54740 on port 1883.
+1764962894: New client connected from 172.18.0.4:54740 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962894: Client WheatherStationUAH-publisher disconnected.
+1764962898: New connection from 172.18.0.4:54748 on port 1883.
+1764962899: New client connected from 172.18.0.4:54748 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962899: Client WheatherStationUAH-publisher disconnected.
+1764962899: New connection from 172.18.0.4:54750 on port 1883.
+1764962899: New client connected from 172.18.0.4:54750 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962899: Client WheatherStationUAH-publisher disconnected.
+1764962899: New connection from 172.18.0.4:54756 on port 1883.
+1764962899: New client connected from 172.18.0.4:54756 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962899: Client WheatherStationUAH-publisher disconnected.
+1764962903: New connection from 172.18.0.4:59768 on port 1883.
+1764962904: New client connected from 172.18.0.4:59768 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962904: Client WheatherStationUAH-publisher disconnected.
+1764962904: New connection from 172.18.0.4:59780 on port 1883.
+1764962904: New client connected from 172.18.0.4:59780 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962904: Client WheatherStationUAH-publisher disconnected.
+1764962904: New connection from 172.18.0.4:59794 on port 1883.
+1764962904: New client connected from 172.18.0.4:59794 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962904: Client WheatherStationUAH-publisher disconnected.
+1764962908: New connection from 172.18.0.4:59804 on port 1883.
+1764962909: New client connected from 172.18.0.4:59804 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962909: Client WheatherStationUAH-publisher disconnected.
+1764962909: New connection from 172.18.0.4:59808 on port 1883.
+1764962909: New client connected from 172.18.0.4:59808 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962909: Client WheatherStationUAH-publisher disconnected.
+1764962909: New connection from 172.18.0.4:59814 on port 1883.
+1764962909: New client connected from 172.18.0.4:59814 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962909: Client WheatherStationUAH-publisher disconnected.
+1764962913: New connection from 172.18.0.4:33160 on port 1883.
+1764962914: New client connected from 172.18.0.4:33160 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962914: Client WheatherStationUAH-publisher disconnected.
+1764962914: New connection from 172.18.0.4:33166 on port 1883.
+1764962914: New client connected from 172.18.0.4:33166 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962914: Client WheatherStationUAH-publisher disconnected.
+1764962914: New connection from 172.18.0.4:33172 on port 1883.
+1764962914: New client connected from 172.18.0.4:33172 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962914: Client WheatherStationUAH-publisher disconnected.
+1764962918: New connection from 172.18.0.4:33180 on port 1883.
+1764962919: New client connected from 172.18.0.4:33180 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962919: Client WheatherStationUAH-publisher disconnected.
+1764962919: New connection from 172.18.0.4:33188 on port 1883.
+1764962919: New client connected from 172.18.0.4:33188 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962919: Client WheatherStationUAH-publisher disconnected.
+1764962919: New connection from 172.18.0.4:33192 on port 1883.
+1764962919: New client connected from 172.18.0.4:33192 as WheatherStationUAH-publisher (p2, c1, k60).
+1764962919: Client WheatherStationUAH-publisher disconnected.
+1764963741: Client LAB12JAV-G3 closed its connection.
+1764963744: New connection from 172.18.0.1:51432 on port 1883.
+1764963744: New client connected from 172.18.0.1:51432 as LAB12JAV-G3 (p2, c1, k15).
+1764964541: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1764964989: Client WheatherStationUAH-subscriber closed its connection.
+1764964990: mosquitto version 2.0.22 terminating
+1764964990: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1764965072: mosquitto version 2.0.22 starting
+1764965072: Config loaded from /mosquitto/config/mosquitto.conf.
+1764965072: Opening ipv4 listen socket on port 1883.
+1764965072: Opening ipv6 listen socket on port 1883.
+1764965072: Opening websockets listen socket on port 9001.
+1764965072: mosquitto version 2.0.22 running
+1764965079: New connection from 172.18.0.4:46570 on port 1883.
+1764965079: New client connected from 172.18.0.4:46570 as WheatherStationUAH-subscriber (p2, c1, k60).
+1764965080: New connection from 172.18.0.1:60980 on port 1883.
+1764965080: New client connected from 172.18.0.1:60980 as LAB12JAV-G3 (p2, c1, k15).
+1764965589: New connection from 172.18.0.4:59226 on port 1883.
+1764965590: New client connected from 172.18.0.4:59226 as WheatherStationUAH-publisher (p2, c1, k60).
+1764965590: Client WheatherStationUAH-publisher disconnected.
+1764965590: New connection from 172.18.0.4:59234 on port 1883.
+1764965590: New client connected from 172.18.0.4:59234 as WheatherStationUAH-publisher (p2, c1, k60).
+1764965590: Client WheatherStationUAH-publisher disconnected.
+1764965590: New connection from 172.18.0.4:59248 on port 1883.
+1764965590: New client connected from 172.18.0.4:59248 as WheatherStationUAH-publisher (p2, c1, k60).
+1764965590: Client WheatherStationUAH-publisher disconnected.
+1764965791: Client WheatherStationUAH-subscriber closed its connection.
+1764965792: mosquitto version 2.0.22 terminating
+1764965792: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1764965828: mosquitto version 2.0.22 starting
+1764965828: Config loaded from /mosquitto/config/mosquitto.conf.
+1764965828: Opening ipv4 listen socket on port 1883.
+1764965828: Opening ipv6 listen socket on port 1883.
+1764965828: Opening websockets listen socket on port 9001.
+1764965828: mosquitto version 2.0.22 running
+1764965829: New connection from 172.18.0.1:32872 on port 1883.
+1764965829: New client connected from 172.18.0.1:32872 as LAB12JAV-G3 (p2, c1, k15).
+1764965834: New connection from 172.18.0.4:46626 on port 1883.
+1764965835: New client connected from 172.18.0.4:46626 as WheatherStationUAH-subscriber (p2, c1, k60).
+1764965888: New connection from 172.18.0.1:52860 on port 1883.
+1764965888: New client connected from 172.18.0.1:52860 as mqtt-explorer-35e885d4 (p2, c1, k60).

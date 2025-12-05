@@ -50,7 +50,7 @@ public class Logic
         ConectionDDBB conector = new ConectionDDBB();
         Connection con = null;
         try {
-            con = conector.obtainConnection(false); // ← Cambiar a FALSE
+            con = conector.obtainConnection(true);  // ← CAMBIAR A TRUE
             Log.log.info("Database Connected");
 
             PreparedStatement ps = ConectionDDBB.SetDataBD(con);
@@ -61,14 +61,10 @@ public class Logic
             Log.log.info("Query => " + ps.toString());
             ps.executeUpdate();
 
-            conector.closeTransaction(con); // ← Agregar COMMIT
             Log.log.info("Data saved successfully");
 
         } catch (SQLException | NullPointerException e) {
             Log.log.error("Error: " + e);
-            if (con != null) {
-                conector.cancelTransaction(con); // ← Agregar ROLLBACK en caso de error
-            }
         } finally {
             conector.closeConnection(con);
         }

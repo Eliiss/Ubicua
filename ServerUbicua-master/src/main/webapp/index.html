@@ -211,6 +211,17 @@
             box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
         }
 
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
+        }
+
         .alert {
             padding: 15px;
             border-radius: 8px;
@@ -311,13 +322,6 @@
             color: #999;
         }
 
-        .empty-state svg {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 20px;
-            opacity: 0.5;
-        }
-
         @media (max-width: 768px) {
             .dashboard {
                 grid-template-columns: 1fr;
@@ -372,7 +376,7 @@
 
                 <div class="button-group">
                     <button class="btn-primary" onclick="sendData()">📤 Enviar Datos Manuales</button>
-                    <button class="btn-secondary" onclick="clearInputs()">🗑️ Limpiar</button>
+                    <button class="btn-secondary" onclick="clearInputs()">🗑️ Limpiar Campos</button>
                 </div>
 
                 <div class="button-group">
@@ -401,6 +405,7 @@
                 <div class="button-group">
                     <button class="btn-secondary" onclick="loadData()" style="flex: 1;">🔄 Actualizar Datos</button>
                     <button class="btn-secondary" onclick="exportCSV()" style="flex: 1;">📥 Descargar CSV</button>
+                    <button class="btn-danger" onclick="deleteAllData()" style="flex: 1;">🗑️ Eliminar Todo</button>
                 </div>
 
                 <div class="table-container">
@@ -435,7 +440,6 @@
         let autoSimulateInterval = null;
         let chart = null;
 
-        // Esperar a que jQuery esté disponible
         function initApp() {
             if (typeof jQuery === 'undefined') {
                 setTimeout(initApp, 100);
@@ -443,7 +447,6 @@
             }
             
             loadData();
-            // Auto-recargar datos cada 10 segundos
             setInterval(loadData, 10000);
         }
 
@@ -497,6 +500,30 @@
             document.getElementById('temperature').value = '22.5';
             document.getElementById('humidity').value = '55.0';
             document.getElementById('light').value = '512';
+            showAlert('✅ Campos limpios', 'success');
+        }
+
+        function deleteAllData() {
+            if (!confirm('⚠️ ¿Estás seguro de que deseas eliminar TODOS los registros? Esta acción no se puede deshacer.')) {
+                return;
+            }
+
+            fetch('DeleteData', {
+                method: 'POST'
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data.includes('OK')) {
+                    showAlert('✅ Todos los datos han sido eliminados', 'success');
+                    loadData();
+                } else {
+                    showAlert('❌ Error al eliminar datos', 'error');
+                }
+            })
+            .catch(error => {
+                showAlert('❌ Error al conectar con el servidor', 'error');
+                console.error('Error:', error);
+            });
         }
 
         function toggleAutoSimulate() {
@@ -561,6 +588,13 @@
 
                 document.getElementById('tableBody').innerHTML = rows;
                 updateChart(labels, temps, hums, lights);
+
+                // Actualizar últimos valores
+                if (resp.length > 0) {
+                    document.getElementById('lastTemp').textContent = resp[0].temperature.toFixed(1) + '°C';
+                    document.getElementById('lastHum').textContent = resp[0].humidity.toFixed(1) + '%';
+                    document.getElementById('lastLight').textContent = resp[0].light;
+                }
             })
             .catch(error => {
                 console.error("Error cargando datos:", error);
