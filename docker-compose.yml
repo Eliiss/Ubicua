@@ -21,7 +21,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: ubicua_db
+      MARIADB_ROOT_PASSWORD: admin
     restart: unless-stopped
+    ports:
+      - "3306:3306"
     volumes:
       - ./db/data:/var/lib/mysql
       - ./db/init:/docker-entrypoint-initdb.d
@@ -29,13 +32,15 @@ services:
       - red-ubicua
 
   tomcat-server:
-    image: tomcat:11.0-jdk21-openjdk
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: tomcat-ubicua
     ports:
       - "8081:8080"
     restart: unless-stopped
     volumes:
-      - ./ServerUbicua-master/target/ServerExampleUbicomp.war:/usr/local/tomcat/webapps/ROOT.war
+      - ./tomcat-logs:/usr/local/tomcat/logs
     depends_on:
       - database
       - mqtt-broker
