@@ -4,7 +4,7 @@
               auth="Container"
               type="javax.sql.DataSource"
               driverClassName="org.mariadb.jdbc.Driver"
-              url="jdbc:mysql://database:3306/ubicua_db"
+              url="jdbc:mariadb://database:3306/ubicua_db"
               username="root"
               password="admin"
               maxActive="20"
