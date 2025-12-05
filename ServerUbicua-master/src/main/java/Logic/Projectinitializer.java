@@ -37,14 +37,14 @@ public class Projectinitializer implements ServletContextListener {
                 suscriber = new MQTTSuscriber(broker);
                 
                 // CAMBIO: Escuchamos solo nuestro tema específico, no todo (#)
-                suscriber.subscribeTopic("ubicomp/temperatura");
-                suscriber.subscribeTopic("ubicomp/humedad");
-                suscriber.subscribeTopic("ubicomp/luz");
-                suscriber.subscribeTopic("ubicomp/led/set");
+                suscriber.subscribeTopic("ubicua_db/temperatura");
+                suscriber.subscribeTopic("ubicua_db/humedad");
+                suscriber.subscribeTopic("ubicua_db/luz");
+                suscriber.subscribeTopic("ubicua_db/led/set");
               
                 
                 // Mensaje de prueba
-                MQTTPublisher.publish(broker, "ubicomp/test", "Servidor Tomcat Iniciado y Escuchando");
+                MQTTPublisher.publish(broker, "ubicua_db/test", "Servidor Tomcat Iniciado y Escuchando");
                 
             } catch (Exception e) {
                 Log.log.error("Error iniciando MQTT (El servidor web sigue funcionando): " + e.getMessage());

@@ -19,10 +19,8 @@ services:
     image: mariadb:latest
     container_name: db-ubicua
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: ubicua_db
-      MYSQL_USER: user_ubicua
-      MYSQL_PASSWORD: userpassword
     restart: unless-stopped
     volumes:
       - ./db/data:/var/lib/mysql
@@ -38,8 +36,8 @@ services:
     restart: unless-stopped
     environment:
       DB_URL: jdbc:mysql://database:3306/ubicua_db
-      DB_USER: user_ubicua
-      DB_PASS: userpassword
+      DB_USER: root
+      DB_PASS: admin
     volumes:
       - ./ServerUbicua-master/target/ServerExampleUbicomp.war:/usr/local/tomcat/webapps/ROOT.war
     depends_on:
