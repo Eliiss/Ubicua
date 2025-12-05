@@ -29,15 +29,11 @@ services:
       - red-ubicua
 
   tomcat-server:
-    image: tomcat:9.0-jdk11-openjdk
+    image: tomcat:11.0-jdk21-openjdk
     container_name: tomcat-ubicua
     ports:
       - "8081:8080"
     restart: unless-stopped
-    environment:
-      DB_URL: jdbc:mysql://database:3306/ubicua_db
-      DB_USER: root
-      DB_PASS: admin
     volumes:
       - ./ServerUbicua-master/target/ServerExampleUbicomp.war:/usr/local/tomcat/webapps/ROOT.war
     depends_on:

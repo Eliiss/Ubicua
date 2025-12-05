@@ -52,8 +52,10 @@ public class ConectionDDBB
     {
         try
           {
-            con.commit();
-            Log.log.debug("Transaction closed");
+            if (con != null) {
+                con.commit();
+                Log.log.debug("Transaction closed");
+            }
           } catch (SQLException ex)
           {
             Log.log.error("Error closing the transaction: " + ex);
@@ -64,8 +66,10 @@ public class ConectionDDBB
     {
         try
           {
-            con.rollback();
-            Log.log.debug("Transaction canceled");
+            if (con != null) {
+                con.rollback();
+                Log.log.debug("Transaction canceled");
+            }
           } catch (SQLException ex)
           {
             Log.log.error("ERROR sql when canceling the transation: " + ex.getSQLState() + "\n"  + ex.toString());
@@ -111,7 +115,7 @@ public class ConectionDDBB
         return ps;
     }    
 
-// Insertar nueva medición
+    // Insertar nueva medición
     public static PreparedStatement SetDataBD(Connection con) {
         return getStatement(con, "INSERT INTO SENSOR_DATA (temperature, humidity, light, timestamp) VALUES (?, ?, ?, ?)");
     }

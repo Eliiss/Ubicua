@@ -5,16 +5,21 @@
 #include <ArduinoJson.h>    // Para el JSON
 
 // ---------- CONFIGURACIÓN DE RED ----------
-const char* ssid = "cubicua";
-const char* password = "";
+const char* ssid = "MOVISTAR_1038";
+const char* password = "3kV3rYeXRWJmEHe9g7g4";
 
 // ---------- CONFIGURACIÓN MQTT ----------
-const char* mqtt_server = "172.29.41.88";   // IP del broker Mosquitto
+const char* mqtt_server = "192.168.0.13";   // IP del broker Mosquitto
 const int mqtt_port = 1883;
 const char* mqtt_client_id = "LAB12JAV-G3";
-// --- Topics ---
-const char* mqtt_topic_publish = "sensors/ST_0889/Weather_station"; // Para ENVIAR datos
-const char* mqtt_topic_command = "sensors/ST_0889/led/set";          // Para RECIBIR órdenes (NUEVO)
+
+// --- Topics de ENVÍO (NUEVOS: Separados por tipo) ---
+const char* topic_temp = "ubicua_db/temperatura";
+const char* topic_hum  = "ubicua_db/humedad";
+const char* topic_luz  = "ubicua_db/luz";
+
+// --- Topic de RECEPCIÓN (Comandos) ---
+const char* mqtt_topic_command = "ubicua_db/led/set"; 
 
 // ---------- CONFIGURACIÓN DE SENSORES ----------
 #define DHTPIN 13       // Pin del DATA del sensor de temperatura y humedad
@@ -39,59 +44,45 @@ WiFiClient espClient;
 PubSubClient client(espClient);
 
 // ---------- ESTADO GLOBAL ----------
-bool manualLedControl = false; // Flag para anular el LDR (NUEVO)
+bool manualLedControl = false; // Flag para anular el LDR
 
 // -------------------------------------------------------
-// ---------- FUNCIÓN CALLBACK ----------
-// Esta función se llama cada vez que llega un mensaje 
-// a un topic al que estamos suscritos.
+// ---------- FUNCIÓN CALLBACK (ACTUADOR) ----------
 // -------------------------------------------------------
 void callback(char* topic, byte* payload, unsigned int length) {
   Serial.print("Mensaje recibido en [");
   Serial.print(topic);
   Serial.print("]: ");
 
-  // Convertir el payload (bytes) a un String
   String message = "";
   for (int i = 0; i < length; i++) {
     message += (char)payload[i];
   }
   Serial.println(message);
 
-  // Comprobar a qué topic ha llegado
   if (String(topic) == mqtt_topic_command) {
-    
-    // Lógica para controlar los LEDs
     if (message == "red") {
-      manualLedControl = true; // Activa el modo manual
-      digitalWrite(LED_R, HIGH);
-      digitalWrite(LED_G, LOW);
-      digitalWrite(LED_B, LOW);
+      manualLedControl = true;
+      digitalWrite(LED_R, HIGH); digitalWrite(LED_G, LOW); digitalWrite(LED_B, LOW);
       Serial.println("Cambiando LED a ROJO");
     } 
     else if (message == "green") {
       manualLedControl = true;
-      digitalWrite(LED_R, LOW);
-      digitalWrite(LED_G, HIGH);
-      digitalWrite(LED_B, LOW);
+      digitalWrite(LED_R, LOW); digitalWrite(LED_G, HIGH); digitalWrite(LED_B, LOW);
       Serial.println("Cambiando LED a VERDE");
     } 
     else if (message == "blue") {
       manualLedControl = true;
-      digitalWrite(LED_R, LOW);
-      digitalWrite(LED_G, LOW);
-      digitalWrite(LED_B, HIGH);
+      digitalWrite(LED_R, LOW); digitalWrite(LED_G, LOW); digitalWrite(LED_B, HIGH);
       Serial.println("Cambiando LED a AZUL");
     } 
     else if (message == "off") {
       manualLedControl = true;
-      digitalWrite(LED_R, LOW);
-      digitalWrite(LED_G, LOW);
-      digitalWrite(LED_B, LOW);
+      digitalWrite(LED_R, LOW); digitalWrite(LED_G, LOW); digitalWrite(LED_B, LOW);
       Serial.println("Apagando LEDs");
     } 
     else if (message == "auto") {
-      manualLedControl = false; // Vuelve al modo automático (LDR)
+      manualLedControl = false;
       Serial.println("Cambiando a modo AUTOMÁTICO (LDR)");
     }
   }
@@ -111,20 +102,14 @@ void setup_wifi() {
   Serial.println(WiFi.localIP());
 }
 
-// --- MODIFICADA ---
 void reconnect() {
   while (!client.connected()) {
     Serial.print("Intentando conexión MQTT...");
     if (client.connect(mqtt_client_id)) {
       Serial.println("Conectado al broker MQTT!");
-      
-      // Suscribirse al topic de comandos (NUEVO)
       if (client.subscribe(mqtt_topic_command)) {
         Serial.println("Suscrito a " + String(mqtt_topic_command));
-      } else {
-        Serial.println("Error al suscribirse al topic de comandos");
       }
-      
     } else {
       Serial.print("Error, rc=");
       Serial.print(client.state());
@@ -135,7 +120,7 @@ void reconnect() {
 }
 
 // -------------------------------------------------------
-// ---------- SETUP (MODIFICADO) ----------
+// ---------- SETUP ----------
 // -------------------------------------------------------
 void setup() {
   Serial.begin(115200);
@@ -153,100 +138,99 @@ void setup() {
 
   client.setBufferSize(1024); 
   client.setServer(mqtt_server, mqtt_port);
-  
-  // Registrar la función callback (NUEVO)
   client.setCallback(callback); 
 
   randomSeed(analogRead(35));
 }
 
 // -------------------------------------------------------
-// ---------- LOOP (MODIFICADO) ----------
+// ---------- LOOP (MODIFICADO PARA 3 TOPICS) ----------
 // -------------------------------------------------------
 void loop() {
   if (!client.connected()) {
     reconnect();
   }
-  // client.loop() es CRÍTICO: revisa si han llegado nuevos mensajes
   client.loop(); 
 
-  // --- Lectura de sensores ---
+  // 1. Lectura de sensores
   float temperature = dht.readTemperature();
   float humidity = dht.readHumidity();
   int lightValue = analogRead(LDR_PIN);
 
-  // --- Lógica de estado de luz y LEDs (MODIFICADA) ---
+  // 2. Lógica LEDs
   String lightStatus;
-  
-  // Solo controla los LEDs con el LDR si NO está en modo manual
   if (!manualLedControl) {
     if (lightValue < 30) {
       lightStatus = "Oscuro";
-      digitalWrite(LED_R, HIGH);
-      digitalWrite(LED_G, LOW);
-      digitalWrite(LED_B, LOW);
+      digitalWrite(LED_R, HIGH); digitalWrite(LED_G, LOW); digitalWrite(LED_B, LOW);
     } else if (lightValue < 60) {
       lightStatus = "Medio";
-      digitalWrite(LED_R, LOW);
-      digitalWrite(LED_G, HIGH);
-      digitalWrite(LED_B, LOW);
+      digitalWrite(LED_R, LOW); digitalWrite(LED_G, HIGH); digitalWrite(LED_B, LOW);
     } else {
       lightStatus = "Claro";
-      digitalWrite(LED_R, LOW);
-      digitalWrite(LED_G, LOW);
-      digitalWrite(LED_B, HIGH);
+      digitalWrite(LED_R, LOW); digitalWrite(LED_G, LOW); digitalWrite(LED_B, HIGH);
     }
   } else {
-    // Si está en modo manual, el JSON reportará "Manual"
     lightStatus = "Manual"; 
   }
 
-  // ---------- Mostrar datos en LCD ----------
+  // 3. Mostrar en LCD
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("T:");
-  lcd.print(temperature, 1);
-  lcd.print("C H:");
-  lcd.print(humidity, 0);
-  lcd.print("%");
-
+  lcd.print("T:"); lcd.print(temperature, 1);
+  lcd.print(" H:"); lcd.print(humidity, 0);
   lcd.setCursor(0, 1);
-  lcd.print("Luz:");
-  lcd.print(lightStatus); // <-- Mostrará "Manual" si se controla por MQTT
+  lcd.print("Luz:"); lcd.print(lightStatus);
 
-  // ---------- Crear JSON con ArduinoJson ----------
-  StaticJsonDocument<1024> doc;
+  // ---------------------------------------------------
+  // ENVÍO DE DATOS SEPARADOS (3 PUBLICACIONES)
+  // ---------------------------------------------------
 
-  doc["sensor_id"] = mqtt_client_id;
-  doc["sensor_type"] = "weather";
-  doc["street_id"] = "ST_0889";
-  doc["timestamp"] = "2025-10-19T12:00:00Z"; 
+  // --- A) Publicar TEMPERATURA ---
+  {
+    StaticJsonDocument<512> doc;
+    doc["sensor_id"] = mqtt_client_id;
+    doc["timestamp"] = "2025-10-19T12:00:00Z";
+    
+    // Solo enviamos temperatura
+    doc["data"]["temperature_celsius"] = temperature;
 
-  JsonObject loc = doc.createNestedObject("location");
-  loc["latitude"] = 40.38503;
-  loc["longitude"] = -3.651995;
-  loc["district"] = "Moratalaz";
-  loc["neighborhood"] = "Moratalaz";
-
-  JsonObject data = doc.createNestedObject("data");
-  data["temperature_celsius"] = temperature;
-  data["humidity_percent"] = humidity;
-  data["light_intensity"] = lightValue;
-  data["light_status"] = lightStatus; // <-- Reporta el estado actual
-
-  // ---------- Serializar y Publicar ----------
-  String payload;
-  serializeJson(doc, payload);
-
-  // Publica en el topic de *sensores*
-  bool ok = client.publish(mqtt_topic_publish, payload.c_str());
-  
-  if (ok) {
-    Serial.println("[MQTT] Estado publicado en " + String(mqtt_topic_publish));
-    // Serial.println(payload); // Opcional: descomentar si quieres ver el JSON enviado
-  } else {
-    Serial.println("[MQTT] ERROR al publicar estado.");
+    String payload;
+    serializeJson(doc, payload);
+    client.publish(topic_temp, payload.c_str());
+    Serial.println("[Temp] Enviado a: " + String(topic_temp));
   }
 
-  delay(5000); // cada 10 segundos
+  // --- B) Publicar HUMEDAD ---
+  {
+    StaticJsonDocument<512> doc;
+    doc["sensor_id"] = mqtt_client_id;
+    doc["timestamp"] = "2025-10-19T12:00:00Z";
+    
+    // Solo enviamos humedad
+    doc["data"]["humidity_percent"] = humidity;
+
+    String payload;
+    serializeJson(doc, payload);
+    client.publish(topic_hum, payload.c_str());
+    Serial.println("[Hum] Enviado a: " + String(topic_hum));
+  }
+
+  // --- C) Publicar LUZ ---
+  {
+    StaticJsonDocument<512> doc;
+    doc["sensor_id"] = mqtt_client_id;
+    doc["timestamp"] = "2025-10-19T12:00:00Z";
+    
+    // Enviamos valor crudo y estado
+    doc["data"]["light_intensity"] = lightValue;
+    doc["data"]["light_status"] = lightStatus;
+
+    String payload;
+    serializeJson(doc, payload);
+    client.publish(topic_luz, payload.c_str());
+    Serial.println("[Luz] Enviado a: " + String(topic_luz));
+  }
+
+  delay(5000); // Esperar 5 segundos antes del siguiente ciclo
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="ISO-8859-1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
-    <title>Server example</title>
+    <title>Ubicomp System</title>
     <style>
         table { font-family: arial, sans-serif; border-collapse: collapse; width: 100%; }
         td, th { border: 1px solid #dddddd; text-align: left; padding: 8px; }
@@ -12,7 +12,9 @@
 </head>
 <body>
     <script>
-        $(document).ready(function () { loadData(); });
+        $(document).ready(function () { 
+            loadData(); 
+        });
 
         function loadData()
         {
@@ -23,11 +25,20 @@
                 async: false,
                 success: function (response)
                 {
-                    var resp = JSON.parse(response);
+                    // CORRECCIÓN 1: No usamos JSON.parse() porque el servidor ya avisa que es JSON
+                    // jQuery ya nos da el objeto listo en 'response'.
+                    var resp = response; 
+                    
+                    // Pequeña protección por si acaso el servidor devolviera texto alguna vez
+                    if (typeof resp === "string") {
+                        try { resp = JSON.parse(resp); } catch(e){}
+                    }
+
                     $("#dataTable").empty();
                     var newRow = "";
                     $.each(resp, function (i, value)
                     {
+                        // Asegúrate de que los nombres coinciden con tu clase Measurement.java (getTimestamp, etc.)
                         newRow += "<tr>";
                         newRow += "<td>" + value.timestamp + "</td>";
                         newRow += "<td>" + value.temperature + " °C</td>";
@@ -36,6 +47,9 @@
                         newRow += "</tr>";
                     });
                     $("#dataTable").append(newRow);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error cargando datos:", error);
                 }
             });
         }
@@ -45,6 +59,7 @@
             var temperature = $('#newTemperature').val();
             var humidity = $('#newHumidity').val();
             var light = $('#newLight').val();
+            
             $.ajax({
                 data: {
                     temperature: temperature,
@@ -54,27 +69,44 @@
                 url: "SetData",
                 type: 'post',
                 async: false,
-                success: function (response) { loadData(); }
+                success: function (response) { 
+                    // CORRECCIÓN 2: Esperamos 0.5 segundos para dar tiempo a MQTT y BBDD
+                    console.log("Datos enviados, esperando confirmación de BBDD...");
+                    setTimeout(function() {
+                        loadData(); 
+                    }, 500); 
+                }
             });
         }
     </script>
-    <h1>SERVER EXAMPLE</h1>
-    <br>
-    <label>Temperature</label>
-    <input type="number" id="newTemperature" step="0.1"><br>
-    <label>Humidity</label>
-    <input type="number" id="newHumidity" step="0.1"><br>
-    <label>Light</label>
-    <input type="number" id="newLight"><br>
-    <button onclick="insertData()">Send</button> 
+    
+    <h1>SISTEMA DE GESTIÓN UBICUA</h1>
+    <div style="padding: 20px; background-color: #f0f0f0; border-radius: 5px;">
+        <h3>Enviar Datos Manuales (Simulación)</h3>
+        <label>Temperatura:</label>
+        <input type="number" id="newTemperature" step="0.1" value="25.0"><br><br>
+        
+        <label>Humedad:</label>
+        <input type="number" id="newHumidity" step="0.1" value="40.0"><br><br>
+        
+        <label>Luz:</label>
+        <input type="number" id="newLight" value="100"><br><br>
+        
+        <button onclick="insertData()" style="padding: 10px 20px; cursor: pointer;">ENVIAR DATOS</button> 
+    </div>
+    
+    <br><br>
+    
+    <h3>Histórico de Mediciones</h3>
+    <button onclick="loadData()">Actualizar Tabla</button>
     <br><br>
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Date/Time</th>
-                <th scope="col">Temperature (°C)</th>
-                <th scope="col">Humidity (%)</th>
-                <th scope="col">Light</th>
+                <th scope="col">Fecha/Hora</th>
+                <th scope="col">Temperatura</th>
+                <th scope="col">Humedad</th>
+                <th scope="col">Luz</th>
             </tr>
         </thead>
         <tbody id="dataTable"></tbody>
